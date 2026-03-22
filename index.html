@@ -6,8 +6,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Eye Opener</title>
-    <link rel="icon" href="icon.png">
-    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" href="image_15.png">
+    <link rel="apple-touch-icon" href="image_15.png">
     <style>
         body { font-family: -apple-system, sans-serif; background-color: #fff; margin: 0; display: flex; justify-content: center; color: #111; -webkit-font-smoothing: antialiased; }
         .container { width: 100%; max-width: 400px; padding: 40px 20px; box-sizing: border-box; text-align: center; }
@@ -18,21 +18,24 @@
             width: 100%; padding: 22px; font-size: 1.2rem; border: 1px solid #eee; 
             border-radius: 15px; box-sizing: border-box; margin-bottom: 20px;
             outline: none; text-align: center; background: #fafafa;
+            -webkit-appearance: none;
         }
+        
+        /* メインボタン：Fridge Combo Standard */
         .main-btn { 
             width: 100%; padding: 20px; background-color: #111; color: #fff; 
             border: none; border-radius: 15px; font-size: 1.1rem; font-weight: bold; 
-            cursor: pointer; transition: 0.2s; margin-bottom: 40px;
+            cursor: pointer; transition: all 0.2s; margin-bottom: 40px;
         }
         .main-btn:active { transform: scale(0.98); opacity: 0.9; }
+        /* コピー完了時のスタイル変更用 */
+        .main-btn.copied { background-color: #444; }
 
-        /* Secondary Buttons & Footer */
         .btn-group { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 40px; border-top: 1px solid #f0f0f0; padding-top: 40px; }
-        .kofi-btn { background: #111; color: #fff; padding: 12px 24px; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .kofi-btn { background: #111; color: #fff; padding: 12px 24px; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 14px; display: inline-block; }
         .install-btn { background: #f0f0f0; color: #444; padding: 10px 20px; border-radius: 15px; text-decoration: none; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
         
         footer { margin-top: 30px; font-size: 12px; color: #999; line-height: 1.6; }
-        .status { height: 1.2rem; margin-top: -30px; margin-bottom: 20px; font-size: 0.9rem; color: #666; font-weight: 600; }
 
         /* Modal for Install Guide */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
@@ -48,9 +51,9 @@
     <h1>Eye Opener</h1>
     <p class="subtitle">Stop guessing. Start seeing your password.</p>
     
-    <div class="status" id="statusMsg"></div>
     <input type="text" id="passInput" placeholder="Password visible here..." autocomplete="off" spellcheck="false">
-    <button class="main-btn" onclick="copyPass()">Copy to Clipboard</button>
+    
+    <button class="main-btn" id="copyBtn" onclick="copyPass()">Copy to Clipboard</button>
 
     <div class="btn-group">
         <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕ Support me on Ko-fi</a>
@@ -79,16 +82,29 @@
 <script>
     function copyPass() {
         const input = document.getElementById('passInput');
-        const msg = document.getElementById('statusMsg');
+        const btn = document.getElementById('copyBtn');
+        
         if (input.value === "") {
-            msg.innerText = "Type something first!";
-            setTimeout(() => { msg.innerText = ""; }, 2000);
+            const originalText = btn.innerText;
+            btn.innerText = "Type something first!";
+            setTimeout(() => { btn.innerText = originalText; }, 1500);
             return;
         }
+
+        // コピー処理
         input.select();
-        navigator.clipboard.writeText(input.value);
-        msg.innerText = "Copied!";
-        setTimeout(() => { msg.innerText = ""; }, 2000);
+        input.setSelectionRange(0, 99999); // スマホ対応
+        navigator.clipboard.writeText(input.value).then(() => {
+            // 成功時のフィードバック
+            const originalText = btn.innerText;
+            btn.innerText = "Copied!";
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove('copied');
+            }, 1500);
+        });
     }
 
     function showModal() { document.getElementById('modal').style.display = 'flex'; }
