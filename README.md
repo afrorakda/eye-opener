@@ -1,11 +1,15 @@
 # Eye Opener
-Stop guessing. Start seeing your password. A minimalist "pure-text" entry tool for confident typing.
+A minimalist tool to stay alert. Visual cues for focus and clarity.
 
-### 🛠 Fridge Combo Standard
-* **Visible Entry**: No more hidden dots (●●●). Type your password or text clearly.
-* **Instant Copy**: One tap to copy your text to the clipboard.
-* **Minimalist UI**: White background, black buttons, 15px rounded corners.
-* **Privacy First**: No login, No tracking, No ads. Everything stays in your browser.
+## Philosophy
+* **1 Tool, 1 Action.**
+* **No Login / No Ads / No Tracking**
+* **Browser-only Privacy**
+
+## How to Use
+1. Open and interact.
+2. Designed to reset your focus instantly.
 
 ---
-*Developed by afrorakda*
+No login / No tracking / No ads / Browser only Privacy Policy  
+**afrorakda © 2026**
