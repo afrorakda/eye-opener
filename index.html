@@ -33,9 +33,9 @@
             padding: 20px; box-sizing: border-box; 
         }
 
-        /* メインユニット：画面上部から強制的に距離をとり、下へ配置 */
+        /* メインユニット：画面下部から3割程度の位置に固定 */
         .main-unit {
-            margin-top: 25vh; /* 上部に大きな空白を作り、入力を下げる */
+            margin-top: 25vh; 
             margin-bottom: auto; 
             width: 100%;
         }
@@ -56,15 +56,17 @@
 
         .input-wrapper { position: relative; margin-bottom: 15px; }
         
+        /* 入力窓：誤読防止のMonospace（等幅）フォントを採用 */
         input { 
             width: 100%; padding: 16px 45px 16px 14px; border: 2px solid var(--accent); border-radius: var(--radius); 
-            box-sizing: border-box; font-size: 22px; outline: none; transition: 0.2s; 
+            box-sizing: border-box; font-size: 24px; outline: none; transition: 0.2s; 
             font-weight: 800; background: var(--input-bg);
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, monospace;
             -webkit-appearance: none; -webkit-text-fill-color: #000; opacity: 1 !important;
             user-select: auto !important; -webkit-user-select: auto !important; 
         }
         input:focus { border-color: var(--main); background: #fff; }
-        input::placeholder { color: #ccc; -webkit-text-fill-color: #ccc; font-weight: 600; font-size: 18px; }
+        input::placeholder { color: #ccc; -webkit-text-fill-color: #ccc; font-weight: 600; font-size: 18px; font-family: -apple-system, sans-serif; }
 
         .btn-clear-x { 
             position: absolute; right: 10px; bottom: 12px; 
@@ -79,9 +81,9 @@
             cursor: pointer; transition: 0.2s; -webkit-appearance: none;
         }
         .main-btn:active { transform: scale(0.97); opacity: 0.8; }
-        .main-btn.copied { background-color: #666; }
+        /* コピー成功時の視覚フィードバック（フラッシュ） */
+        .main-btn.copied { background-color: #555 !important; }
 
-        /* 鉄壁フッター：アウトラインスタイルで圧迫感を解消 */
         footer { margin-top: auto; padding: 20px 0 30px; text-align: center; border-top: 1px solid #f5f5f5; font-size: 11px; color: #666; font-weight: 600; }
         .footer-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
         
@@ -114,7 +116,7 @@
         </header>
         
         <div class="input-wrapper">
-            <input type="text" id="passInput" placeholder="Password visible here..." autocomplete="off" spellcheck="false" oninput="handleIn(this)">
+            <input type="text" id="passInput" placeholder="Password visible here..." autocomplete="off" spellcheck="false" oninput="handleIn(this)" autofocus>
             <button id="cl" class="btn-clear-x" onclick="clearInput()">✕</button>
         </div>
         
@@ -167,7 +169,7 @@
             setTimeout(() => {
                 btn.innerText = originalText;
                 btn.classList.remove('copied');
-            }, 1500);
+            }, 1000);
         });
     }
 
