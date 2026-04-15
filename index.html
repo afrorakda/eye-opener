@@ -33,21 +33,20 @@
             padding: 20px; box-sizing: border-box; 
         }
 
-        /* コンテンツ全体を中央〜やや下へ浮かせる */
+        /* メインユニット：画面上部から強制的に距離をとり、下へ配置 */
         .main-unit {
-            margin-top: auto;
-            margin-bottom: 12vh; /* 視覚的バランス：中央より少し下 */
+            margin-top: 25vh; /* 上部に大きな空白を作り、入力を下げる */
+            margin-bottom: auto; 
             width: 100%;
         }
         
         header { 
             display: flex; justify-content: space-between; align-items: start; 
-            margin-bottom: 25px; 
+            margin-bottom: 30px; 
         }
         .title-group h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.8px; margin: 0; }
         .subtitle { font-size: 0.85rem; color: #777; font-weight: 500; margin-top: 4px; }
 
-        /* Hubボタンをステルス化：タイトルに馴染ませる */
         .hub-link { 
             text-decoration: none; font-size: 0.7rem; font-weight: 800; color: #999; 
             background: transparent; border: 1px solid #ddd; padding: 4px 8px; border-radius: 10px; 
@@ -82,11 +81,10 @@
         .main-btn:active { transform: scale(0.97); opacity: 0.8; }
         .main-btn.copied { background-color: #666; }
 
-        /* 鉄壁フッター：圧迫感を抜くためのアウトラインスタイル */
+        /* 鉄壁フッター：アウトラインスタイルで圧迫感を解消 */
         footer { margin-top: auto; padding: 20px 0 30px; text-align: center; border-top: 1px solid #f5f5f5; font-size: 11px; color: #666; font-weight: 600; }
         .footer-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
         
-        /* アウトライン化：白背景＋黒枠 */
         .outline-btn { 
             background: #fff; color: var(--main); border: 2px solid var(--main); 
             padding: 12px; border-radius: var(--radius); text-decoration: none; 
@@ -187,7 +185,6 @@
             const response = await fetch('footer.json');
             if (!response.ok) return;
             const data = await response.json();
-            // JSONから読み込んでもデザイン（outline-btnクラス）は維持される
             if(data.kofi) { document.getElementById('kofi-link').href = data.kofi.url; document.getElementById('kofi-link').textContent = data.kofi.text; }
             if(data.install) {
                 document.getElementById('install-text').textContent = data.install.text;
