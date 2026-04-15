@@ -30,16 +30,17 @@
         .container { 
             width: 100%; max-width: 380px; min-height: 100vh; 
             display: flex; flex-direction: column; position: relative; 
-            padding: 15px 20px 100px; 
+            padding: 15px 20px 100px; /* iPhone下部メニュー回避のため余白確保 */
             box-sizing: border-box; 
         }
         
         header { 
             display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 20px; 
+            margin-top: 10vh; /* タイトルを少し下に下げる */
+            margin-bottom: 30px; 
         }
         .title-group h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.8px; margin: 0; }
-        .subtitle { font-size: 0.75rem; color: #666; font-weight: 500; margin-top: 1px; }
+        .subtitle { font-size: 0.85rem; color: #666; font-weight: 500; margin-top: 1px; }
 
         .hub-link { 
             text-decoration: none; font-size: 0.7rem; font-weight: 800; color: var(--main); 
@@ -48,9 +49,11 @@
         }
         .hub-link:active { transform: scale(0.95); opacity: 1; }
 
-        .input-wrapper { position: relative; margin-bottom: 15px; }
-        
+        /* 入力窓を下に配置するためのスペーサー */
+        .spacer { flex: 1; }
+
         /* 入力強化：22px、極太800、純黒#000、フォーカス背景白 */
+        .input-wrapper { position: relative; margin-top: 50px; margin-bottom: 15px; }
         input { 
             width: 100%; padding: 16px 45px 16px 14px; border: 2px solid var(--accent); border-radius: var(--radius); 
             box-sizing: border-box; font-size: 22px; outline: none; transition: 0.2s; 
@@ -95,11 +98,13 @@
     <header>
         <div class="title-group">
             <h1>Eye Opener</h1>
-            <p class="subtitle">Stop guessing. Start seeing your password.</p>
+            <p class="subtitle">Start seeing your password.</p>
         </div>
         <a href="https://afrorakda.github.io/" class="hub-link">🏠 Hub</a>
     </header>
     
+    <div class="spacer"></div>
+
     <div class="input-wrapper">
         <input type="text" id="passInput" placeholder="Password visible here..." autocomplete="off" spellcheck="false" oninput="handleIn(this)">
         <button id="cl" class="btn-clear-x" onclick="clearInput()">✕</button>
